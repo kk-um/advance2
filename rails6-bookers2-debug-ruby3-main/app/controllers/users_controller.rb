@@ -5,6 +5,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books
     @book = Book.new
+    @followings = @user.followings
+    @followers = @user.followers
   end
 
   def index
@@ -23,6 +25,16 @@ class UsersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def follows
+  user = User.find(params[:id])
+  @users = user.followings.page(params[:page]).per(3).reverse_order
+  end
+
+  def followers
+  user = User.find(params[:id])
+  @users = user.followers.page(params[:page]).per(3).reverse_order
   end
 
   private
