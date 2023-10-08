@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'book_comments/destroy'
   get 'favorites/create'
   get 'favorites/destroy'
+  get "/search" => "searches#search"
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root to: 'homes#top'
