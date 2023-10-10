@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :books
+  has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
 
@@ -14,6 +14,9 @@ class User < ApplicationRecord
   has_many :followers, through: :reverse_relationships, source: :follower
   has_one_attached :profile_image
 
+  has_many :messages, dependent: :destroy
+  has_many :entries, dependent: :destroy
+  
   validates :introduction, length: { maximum: 50 }
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
 

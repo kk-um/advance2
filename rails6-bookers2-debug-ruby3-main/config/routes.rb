@@ -1,22 +1,17 @@
 Rails.application.routes.draw do
-  get 'relationships/create'
-  get 'relationships/destroy'
-  get 'book_comments/create'
-  get 'book_comments/destroy'
-  get 'favorites/create'
-  get 'favorites/destroy'
-  get "/search" => "searches#search"
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :users
 
   root to: 'homes#top'
+  get "home/about"=>"homes#about"
 
-  devise_for :users
-  resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do 
+  get 'relationships/create'
+  get 'relationships/destroy'
+
+  resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
     resources :book_comments, only: [:create, :destroy]
     resource :favorites, only: [:create, :destroy]
- end 
- 
+ end
+
   resources :users, only: [:index,:show,:edit,:update] do
     member do
       get :follows, :followers
@@ -24,6 +19,9 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
   end
 
-  get "home/about"=>"homes#about"
+  resources :messages, only: [:create]
+  resources :rooms, only: [:create, :show]
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get "/search" => "searches#search"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
