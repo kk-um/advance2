@@ -7,6 +7,9 @@ before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def show
     @book = Book.find(params[:id])
+     @read_count = ReadCount.new(book_id: @book.id, user_id: current_user.id)
+     @read_count.save
+     
     @user = @book.user
     @newbook = Book.new
     @book_comment = BookComment.new

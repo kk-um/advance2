@@ -17,6 +17,8 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :entries, dependent: :destroy
   
+  has_many :read_counts, dependent: :destroy
+  
   validates :introduction, length: { maximum: 50 }
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
 
