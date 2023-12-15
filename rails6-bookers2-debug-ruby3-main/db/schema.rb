@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2023_10_10_084242) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+# 相互限定でDMできるようにする
   create_table "entries", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "room_id", null: false
@@ -65,6 +66,7 @@ ActiveRecord::Schema.define(version: 2023_10_10_084242) do
     t.index ["user_id"], name: "index_entries_on_user_id"
   end
 
+# いいね
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "book_id"
@@ -72,6 +74,7 @@ ActiveRecord::Schema.define(version: 2023_10_10_084242) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+# 相互限定でDMできるようにする
   create_table "messages", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "room_id", null: false
@@ -82,6 +85,7 @@ ActiveRecord::Schema.define(version: 2023_10_10_084242) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+# 閲覧数
   create_table "read_counts", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "book_id", null: false
@@ -91,6 +95,7 @@ ActiveRecord::Schema.define(version: 2023_10_10_084242) do
     t.index ["user_id"], name: "index_read_counts_on_user_id"
   end
 
+# フォロー機能
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
@@ -98,6 +103,7 @@ ActiveRecord::Schema.define(version: 2023_10_10_084242) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+# 相互限定でDMできるようにする
   create_table "rooms", force: :cascade do |t|
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false

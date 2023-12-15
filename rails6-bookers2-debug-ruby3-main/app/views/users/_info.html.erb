@@ -31,7 +31,7 @@
    <% unless user.id == current_user.id %>
   <% if (current_user.following? user) && (user.following? current_user)  %>
   <% if isRoom == true %>
-    <td><%= link_to 'chatを始める', room_path(@roomId) %></td>
+    <td><%= link_to 'chatを始める', room_path(@roomID) %></td>
 
   <% else %>
     <%= form_for room do |f| %>
